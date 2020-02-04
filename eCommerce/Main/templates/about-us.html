@@ -1,0 +1,109 @@
+{% include "header.html" %}
+{% load static %}
+
+<div class="container">
+  <ul class="breadcrumb">
+      <li><a href="../"><i class="fa fa-home"></i></a></li>
+      <li><a href="about-us">About Us</a></li>
+  </ul>
+  <div class="row">
+    <div class="col-md-12 title ">
+      <h4 class="tf">Developer </h4>
+    </div>
+  </div>
+  <div class="row team">
+    <div class="col-md-3 col-sm-3 team1 ">
+      <div class="photo">
+        <div class="imageblock"> <img alt="#" src="{% static 'image/pp.jpg' %}" style="border-radius: 140px;" class="img-responsive"> </div>
+        <div class="name"> <a href="#">RUSAN VAIDYA</a> </div>
+        <h3>Founder and CEO</h3>
+        <p>Mo & chi was established in 2019. The CEO of this company developed this site at Training.</p>
+      </div>
+    </div>
+    <div class="skill">
+      <div class="col-md-6">
+        <h4 class="tf">Skills</h4>
+        <ul>
+          <li>
+            <h3>78% Graphic design</h3>
+            <div id="progress1"> </div>
+          </li>
+          <li>
+            <h3>92% web design</h3>
+            <div id="progress2"> </div>
+          </li>
+          <li>
+            <h3>76% Marketing</h3>
+            <div id="progress3"> </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="features">
+      <div class="col-md-3">
+        <div class="icon clearfix  "> <a href="#"><i class="circle fa fa-delicious"></i>
+          <div class="content">
+            <h4 class="tf">Clean design</h4>
+            <p>Elegant layouts that help you organize your content in the best way</p>
+          </div>
+          </a></div>
+      </div>
+      <div class="col-md-3">
+        <div class="icon clearfix  "><a href="#"><i class="circle fa fa-html5"></i>
+          <div class="content">
+            <h4 class="tf">Html5 &amp; css3</h4>
+            <p>Built with modern technologies like HTML5 and CSS3, SEO optimised</p>
+          </div>
+          </a></div>
+      </div>
+      <div class="col-md-3">
+        <div class="icon clearfix  "><a href="#"><i class="circle fa fa-desktop"></i>
+          <div class="content">
+            <h4 class="tf">Responsive layout</h4>
+            <p>Compatible with various desktop, tablet, and mobile devices</p>
+          </div>
+          </a></div>
+      </div>
+      <div class="col-md-3">
+        <div class="icon clearfix  "><a href="#"><i class="circle fa fa-pencil-square-o"></i>
+          <div class="content">
+            <h4 class="tf">Customization</h4>
+            <p>Clear code and documentation, build with Bootstrap 3</p>
+          </div>
+          </a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer block Start  -->
+{% include "footer.html" %}
+
+<!-- Footer block End  -->
+
+
+<script type="text/javascript">
+		$( "#progress1" ).appendSimpleProgressBar();
+		$( "#progress1" ).slow( { width:"78" } );
+
+		$( "#progress2" ).appendSimpleProgressBar();
+		$( "#progress2" ).slow( { width:"92" } );
+
+		$( "#progress3" ).appendSimpleProgressBar();
+		$( "#progress3" ).slow( { width:"76" } );
+
+		$( "#progress4" ).appendSimpleProgressBar();
+		$( "#progress4" ).slow( { width:"98" } );
+
+
+</script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<script src="js/jQuery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.js"></script>
+</body>
+</html>

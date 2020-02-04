@@ -1,0 +1,256 @@
+{% include "header.html" %}
+{% load static %}
+<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="../"><i class="fa fa-home"></i></a></li>
+    <li><a href="category">Category</a></li>
+    {% if brand == None %}
+        {% if type_s == None %}
+          {% for i in viewfor %}
+          {% ifchanged i.for_gender %}
+    <li><a href="category?gfor={{i.for_gender}}">{{i.for_gender}}</a></li>
+    {% endifchanged %}
+    {% endfor %}
+    {% endif %}
+    {% endif %}
+
+    {% if brand is not None %}
+    {% for i in branded %}
+    {% ifchanged i.brand %}
+    <li><a href="category?brand={{i.brand}}">{{i.brand}}</a></li>
+    {% endifchanged %}
+    {% endfor %}
+    {% endif %}
+  </ul>
+  <div class="row">
+    <div id="column-left" class="col-sm-3 hidden-xs column-left">
+      <div class="panel panel-default filter">
+        {% include "categorylist.html" %}        
+      </div>
+    </div>
+    <div id="content" class="col-sm-9">
+      <div class="category-page-wrapper">
+        <div class="col-md-6 list-grid-wrapper">
+          <div class="btn-group btn-list-grid">
+            <button type="button" id="list-view" class="btn btn-default list" data-toggle="tooltip" title="List"><i class="fa fa-th-list"></i></button>
+            <button type="button" id="grid-view" class="btn btn-default grid" data-toggle="tooltip" title="Grid"><i class="fa fa-th"></i></button>
+          </div>
+      <br />
+      <div class="grid-list-wrapper">
+        {% if search_element == None %}
+        {% if brand == None %}
+        {% if type_s == None %}
+          {% for i in viewfor %}
+          <div class="product-layout product-list col-xs-12">
+            <div class="product-thumb">
+              <div class="image product-imageblock"> <a href="product?p_id={{i.id}}&brand={{i.brand}}"> <img src="{{i.img_product.url}}" class="img-responsive" /> </a>
+      <div class="button-group">
+                      <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+                </div>
+              </div>
+              <div class="caption product-detail">
+                <h4 class="product-name"> <a href="product?p_id={{i.id}}&brand={{i.brand}}">{{i.item}}</a> </h4>
+              <p class="product-desc"> {{i.description}}</p>
+                <p class="price product-price"><span class="price-old">Rs. {{i.old_price}}</span> Rs. <span class="price_new"></span>{{i.price}}</span></p>
+               <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+              </div>
+   <div class="button-group">
+                  <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+             </div>
+            </div>
+           </div>
+          {% endfor %}
+        {% if pfor == None %}
+        {% for i in prod %}
+          <div class="product-layout product-list col-xs-12">
+            <div class="product-thumb">
+              <div class="image product-imageblock"> <a href="product?p_id={{i.id}}&brand={{i.brand}}"> <img src="{{i.img_product.url}}" class="img-responsive picture" /> </a>
+      <div class="button-group">
+                      <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+                </div>
+              </div>
+              <div class="caption product-detail">
+                <h4 class="product-name"> <a href="product?p_id={{i.id}}&brand={{i.brand}}" >{{i.item}}</a> </h4>
+              <p class="product-desc"> {{i.description}}</p>
+                <p class="price product-price"><span class="price-old">Rs. {{i.old_price}}</span> Rs. <span class="price_new">{{i.price}}</span></p>
+                <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+             </div>
+   <div class="button-group">
+               <button type="button" id="{{i.id}}" class="wishlist wishlist_js" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+                <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+            </div>
+           </div>
+          </div>
+        {% endfor %}
+        {% endif %}
+        {% endif %}
+        {% if type_s is not None %}
+        {% for i in p_f_t %}
+        <div class="product-layout product-list col-xs-12">
+          <div class="product-thumb">
+            <div class="image product-imageblock"> <a href="product?p_id={{i.id}}&brand={{i.brand}}"> <img src="{{i.img_product.url}}" class="img-responsive picture" /> </a>
+    <div class="button-group">
+                  <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+              </div>
+            </div>
+            <div class="caption product-detail">
+              <h4 class="product-name"> <a href="product?p_id={{i.id}}&brand={{i.brand}}">{{i.item}}</a> </h4>
+              <p class="brand_name" style="display:none">{{i.brand}}</p><p class="prod_id" style="display:none">{{i.id}}</p>>
+              <p class="product-desc"> {{i.description}}</p>
+              <p class="price product-price"><span class="price-old">Rs. {{i.old_price}}</span> Rs. <span class="price_new">{{i.price}}</span></p>
+              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+            </div>
+  <div class="button-group">
+              <button type="button" id="{{i.id}}" class="wishlist wishlist_js" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+              <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% else %}
+        {% for i in branded %}
+        <div class="product-layout product-list col-xs-12">
+          <div class="product-thumb">
+            <div class="image product-imageblock"> <a href="product?p_id={{i.id}}&brand={{i.brand}}"> <img src="{{i.img_product.url}}" class="img-responsive picture" /> </a>
+    <div class="button-group">
+                <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+              </div>
+            </div>
+            <div class="caption product-detail">
+              <h4 class="product-name"> <a href="product?p_id={{i.id}}&brand={{i.brand}}">{{i.item}}</a> </h4>
+              <p class="brand_name" style="display:none">{{i.brand}}</p><p class="prod_id" style="display:none">{{i.id}}</p>>
+              <p class="product-desc"> {{i.description}}</p>
+              <p class="price product-price"><span class="price-old">Rs. {{i.old_price}}</span> Rs. <span class="price_new">{{i.price}}</span></p>
+              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+            </div>
+  <div class="button-group">
+              <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endif %}
+        {% if search_element is not None%}
+        {% for i in search_id %}
+        <div class="product-layout product-list col-xs-12">
+          <div class="product-thumb">
+            <div class="image product-imageblock"> <a href="product?p_id={{i.id}}&brand={{i.brand}}"> <img src="{{i.img_product.url}}" class="img-responsive picture" /> </a>
+    <div class="button-group">
+                <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+              </div>
+            </div>
+            <div class="caption product-detail">
+              <h4 class="product-name"> <a href="product?p_id={{i.id}}&brand={{i.brand}}">{{i.item}}</a> </h4>
+              <p class="brand_name" style="display:none">{{i.brand}}</p><p class="prod_id" style="display:none">{{i.id}}</p>>
+              <p class="product-desc"> {{i.description}}</p>
+              <p class="price product-price"><span class="price-old">Rs. {{i.old_price}}</span> Rs. <span class="price_new">{{i.price}}</span></p>
+              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+            </div>
+  <div class="button-group">
+              <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% for i in search_i %}
+        <div class="product-layout product-list col-xs-12">
+          <div class="product-thumb">
+            <div class="image product-imageblock"> <a href="product?p_id={{i.id}}&brand={{i.brand}}"> <img src="{{i.img_product.url}}" class="img-responsive picture" /> </a>
+    <div class="button-group">
+                <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+              </div>
+            </div>
+            <div class="caption product-detail">
+              <h4 class="product-name"> <a href="product?p_id={{i.id}}&brand={{i.brand}}">{{i.item}}</a> </h4>
+              <p class="brand_name" style="display:none">{{i.brand}}</p><p class="prod_id" style="display:none">{{i.id}}</p>>
+              <p class="product-desc"> {{i.description}}</p>
+              <p class="price product-price"><span class="price-old">Rs. {{i.old_price}}</span> Rs. <span class="price_new">{{i.price}}</span></p>
+              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+            </div>
+  <div class="button-group">
+              <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% for i in search_for %}
+        <div class="product-layout product-list col-xs-12">
+          <div class="product-thumb">
+            <div class="image product-imageblock"> <a href="product?p_id={{i.id}}&brand={{i.brand}}"> <img src="{{i.img_product.url}}" class="img-responsive picture" /> </a>
+    <div class="button-group">
+                <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+              </div>
+            </div>
+            <div class="caption product-detail">
+              <h4 class="product-name"> <a href="product?p_id={{i.id}}&brand={{i.brand}}">{{i.item}}</a> </h4>
+              <p class="brand_name" style="display:none">{{i.brand}}</p><p class="prod_id" style="display:none">{{i.id}}</p>>
+              <p class="product-desc"> {{i.description}}</p>
+              <p class="price product-price"><span class="price-old">Rs. {{i.old_price}}</span> Rs. <span class="price_new">{{i.price}}</span></p>
+              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+            </div>
+  <div class="button-group">
+              <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% for i in searchb %}
+        <div class="product-layout product-list col-xs-12">
+          <div class="product-thumb">
+            <div class="image product-imageblock"> <a href="product?p_id={{i.id}}&brand={{i.brand}}"> <img src="{{i.img_product.url}}" class="img-responsive picture" /> </a>
+    <div class="button-group">
+                <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+              </div>
+            </div>
+            <div class="caption product-detail">
+              <h4 class="product-name"> <a href="product?p_id={{i.id}}&brand={{i.brand}}">{{i.item}}</a> </h4>
+              <p class="brand_name" style="display:none">{{i.brand}}</p><p class="prod_id" style="display:none">{{i.id}}</p>>
+              <p class="product-desc"> {{i.description}}</p>
+              <p class="price product-price"><span class="price-old">Rs. {{i.old_price}}</span> Rs. <span class="price_new">{{i.price}}</span></p>
+              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+            </div>
+  <div class="button-group">
+              <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% for i in searchf %}
+        <div class="product-layout product-list col-xs-12">
+          <div class="product-thumb">
+            <div class="image product-imageblock"> <a href="product?p_id={{i.id}}&brand={{i.brand}}"> <img src="{{i.img_product.url}}" class="img-responsive picture" /> </a>
+    <div class="button-group">
+                <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+              </div>
+            </div>
+            <div class="caption product-detail">
+              <h4 class="product-name"> <a href="product?p_id={{i.id}}&brand={{i.brand}}">{{i.item}}</a> </h4>
+              <p class="brand_name" style="display:none">{{i.brand}}</p><p class="prod_id" style="display:none">{{i.id}}</p>>
+              <p class="product-desc"> {{i.description}}</p>
+              <p class="price product-price"><span class="price-old">Rs. {{i.old_price}}</span> Rs. <span class="price_new">{{i.price}}</span></p>
+              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+            </div>
+  <div class="button-group">
+              <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer block Start  -->
+{% include "footer.html" %}
+
+</body>
+</html>
+
+{%block js%}
+<!--  -->
+{% include "addtocart.html" %}
+{% endblock %}

@@ -1,0 +1,85 @@
+{% include "header.html" %}
+{% load static %}
+
+
+<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="../"><i class="fa fa-home"></i></a></li>
+    <li><a href="contact">Contact Us</a></li>
+  </ul>
+  <div class="row">
+    <div id="column-left" class="col-sm-3 hidden-xs column-left">
+      <div class="column-block">
+        {% include "categorylist.html" %}
+
+      </div>
+    </div>
+    <div class="col-sm-9" id="content">
+      <h1>Contact Us</h1>
+      <h3>Our Location</h3>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-4 left">
+              <address>
+              <strong> Store Name: </strong>Mo & Chi<br>
+              <br>
+              <strong>Address:</strong>
+              <div class="address"> Subhidhanagar, Tinkune</div>
+              <br>
+              <strong>Country:</strong> Nepal <br>
+              <br>
+              <strong>Phone: </strong>+9771 470000
+              </address>
+            </div>
+            <div class="col-sm-8 rigt">
+              <div class="map">
+                <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+                <div style="overflow:hidden;height:200px;width:100%;">
+                  <div id="gmap_canvas" style="height:200px;width:600px;"></div>
+
+                  <a class="google-map-code" href="http://www.pureblack.de/google-maps/" id="get-map-data">pureblack.de</a></div>
+                <script type="text/javascript"> function init_map(){var myOptions = {zoom:14, scrollwheel:false,center:new google.maps.LatLng(36.778261,-119.41793239999998),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(36.778261, -119.41793239999998)});infowindow = new google.maps.InfoWindow({content:"<b>Fresh Food privated limited</b><br/>Warehouse &amp; Offices 12345<br/> California " });google.maps.event.addListener(marker, "click", function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="form-horizontal" enctype="multipart/form-data" method="post" action="contact">
+        {% csrf_token %}
+        <fieldset>
+          <h3>Contact Form</h3>
+          <div class="form-group required">
+            <label for="input-name" class="col-sm-2 control-label">Your Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="input-name" value="" name="full_name" required>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label for="input-email" class="col-sm-2 control-label">E-Mail Address</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="input-email" value="" name="email" required>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label for="input-enquiry" class="col-sm-2 control-label">Enquiry</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="input-enquiry" rows="10" required style="resize: none;" name="enquiry"></textarea>
+            </div>
+          </div>
+        </fieldset>
+        <div class="buttons">
+          <div class="pull-right">
+            <input type="submit" value="Submit" class="btn btn-primary">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Footer block Start  -->
+{% include "footer.html" %}
+
+
+</body>
+</html>

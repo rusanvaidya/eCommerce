@@ -1,0 +1,33 @@
+{% include "header.html" %}
+{% load static %}
+
+<div class="container">
+    <ul class="breadcrumb">
+        <li><a href="../"><i class="fa fa-home"></i></a></li>
+        <li><a href="#">Account</a></li>
+        <li><a href="register">Register</a></li>
+    </ul>
+    <div class="row">
+        <div class="col-sm-3 hidden-xs column-left" id="column-left">
+            <div class="column-block">
+                <div class="columnblock-title">Account</div>
+                <div class="account-block">
+                    <div class="list-group"><a class="list-group-item" href="myaccount">My Account</a> <a class="list-group-item" href="#">Address Book</a> <a class="list-group-item" href="#">Wish List</a> <a class="list-group-item" href="#">Order History</a> <a class="list-group-item" href="download">Downloads</a> <a class="list-group-item" href="#">Reward Points</a> <a class="list-group-item" href="#">Returns</a> <a class="list-group-item" href="#">Transactions</a><a class="list-group-item" href="#">Newsletter</a><a class="list-group-item last" href="#">Recurring payments</a> </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9" id="content">
+            <h1>Register Account</h1>
+            <p>If you already have an account with us, please login at the <a href="login">login page</a>.</p>
+            <div>
+                {% for m in messages %}
+                <i style="color:red">* {{m}}</i>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer block Start  -->
+{% include "footer.html" %}
+</body>
+</html>

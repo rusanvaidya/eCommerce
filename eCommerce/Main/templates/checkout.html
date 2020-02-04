@@ -1,0 +1,148 @@
+{% include "header.html" %}
+{% load static %}
+
+
+<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="../"><i class="fa fa-home"></i></a></li>
+    <li><a href="cart">Shopping Cart</a></li>
+    <li><a href="checkout">Checkout</a></li>
+  </ul>
+  <div class="row">
+    <div id="column-left" class="col-sm-3 hidden-xs column-left">
+      <div class="column-block">
+        <div class="column-block">
+              {% include "categorylist.html" %}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9" id="content">
+      <h1>Checkout</h1>
+      <div id="accordion" class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="true">Step 3: Confirm Order <i class="fa fa-caret-down"></i></a></h4>
+          </div>
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left">Product Name</td>
+                      <td class="text-left">Model</td>
+                      <td class="text-right">Quantity</td>
+                      <td class="text-right">Unit Price</td>
+                      <td class="text-right">Total</td>
+                    </tr>
+                  </thead>
+                  <tbody id="checkout_item">
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td class="text-right" colspan="4"><strong>Sub-Total:</strong></td>
+                      <td class="text-right">Rs.<span id="sub_total_check"></span></td>
+                    </tr>
+                    <tr>
+                      <td class="text-right" colspan="4"><strong>Delivery Charge:</strong></td>
+                      <td class="text-right" >Rs.<span id="charge_check"></span></td>
+                    </tr>
+                    <tr>
+                      <td class="text-right" colspan="4"><strong>Total:</strong></td>
+                      <td class="text-right" >Rs.<span id="total_check"></span></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <div class="form-group">
+                <style>
+  
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button {
+                  -webkit-appearance: none;
+                   margin: 0;
+                }
+                </style>
+              
+              <form class="form-horizontal" method="POST" action="checkout">
+                {% csrf_token %}
+                <input required type="hidden" id="itemJSON" name="itemJSON">
+                <b>Please select the preferred payment method to use on this order.</b>
+                  <div class="radio">
+                    <label>
+                      <input required type="radio" checked="checked" value="Cash on Delivery" name="pay_method">
+                      Cash On Delivery </label>
+                    <label><input required type="radio" checked="checked" value="eSewa" name="pay_method">
+                      eSewa</label>
+                  </div>
+                  <b>Please select the your information and preferred destination this order.</b>
+                <br>
+                <div id="shipping-new">
+                  <div class="form-group required">
+                    <label for="input-shipping-firstname" class="col-sm-2 control-label">Full Name</label>
+                    <div class="col-sm-10">
+                      <input required type="text" class="form-control" id="input-shipping-firstname" placeholder="First Name" value="" name="full_name">
+                      {% if user.is_authenticated %}
+                      <input required type="text" name="sender" style="display: none;" value="{{user.first_name}} {{user.last_name}}">
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="form-group required">
+                    <label for="input-shipping-address-1" class="col-sm-2 control-label">Address</label>
+                    <div class="col-sm-10">
+                      <textarea type="text" class="form-control" id="input-shipping-address-1" placeholder="Address 1" value=""  style="resize: none;" name="address"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group required">
+                    <label for="input-shipping-address-2" class="col-sm-2 control-label">Phone Number</label>
+                    <div class="col-sm-10">
+                      <input required type="number" class="form-control" id="input-shipping-address-2" placeholder="Phone Number" value="" name="tele">
+                    </div>
+                  </div>
+                </div>
+                <div class="buttons clearfix">
+                  <div class="pull-right">
+                    {% if user.is_authenticated %}
+                    <input required type="submit" class="btn btn-primary btn-confirm" id="button-confirm" value="Confirm Order">
+                    {% else %}
+                    <input required type="submit" class="btn btn-primary btn-confirm" id="button-confirm" value="Confirm Order" disabled><br>
+                    <a href="login"><i style="color: red">*Please login First.</i></a>
+                    {% endif %}
+                  </div>
+                </div>
+                <script>
+                  $('.btn-confirm').click(function(){
+                        localStorage.removeItem('cart_item')
+                        localStorage.removeItem('subtotal')
+                        localStorage.removeItem('charge')
+                        localStorage.removeItem('total')
+                        localStorage.removeItem('view_cart')
+                        localStorage.removeItem('cart_info')
+                  })
+                  </script>
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer block Start  -->
+{% include "footer.html" %}
+
+
+</body>
+</html>
+
+<script>
+  var addedtocheck = localStorage.getItem('checkout')
+  var p_add_c = document.getElementById('checkout_item')
+  p_add_c.innerHTML = addedtocheck
+  document.getElementById("sub_total_check").innerText=localStorage.getItem('subtotal')
+  document.getElementById("charge_check").innerText=localStorage.getItem('charge')
+  document.getElementById("total_check").innerText=localStorage.getItem('total')
+
+  $('#itemJSON').val(JSON.stringify(localStorage.getItem('cart_info')))
+</script>
+{%block js%}
+{% include "addtocart.html" %}
+{% endblock %}

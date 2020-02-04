@@ -1,0 +1,156 @@
+﻿{% include "header.html" %}
+{% load static %}
+
+<div class="mainbanner">
+  <div id="main-banner" class="owl-carousel home-slider">
+    {% for b in banner_photo %}
+    <div class="item"> <a href="#"><img src="{{b.img_banner.url}}" style="width:100%; height:60%;" alt="main-banner1" class="img-responsive" /></a> </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    {% for s in sub_banner_photo %}
+    <div class="cms_banner ">
+        <div class="col-md-4 cms-banner-left"> <a href="category?brand={{s.brand}}"><img alt="#" src="{{s.img_sub_banner.url}}" style="width:170px; height:170px;"></a> </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="row">
+    <div id="content" class="col-sm-12">
+      <div class="customtab">
+        <div id="tabs" class="customtab-wrapper">
+          <ul class='customtab-inner'>
+            <li class='tab'><a href="#tab-latest">Latest Product</a></li>
+            <li class='tab'><a href="#tab-special">Special Product</a></li>
+            <li class='tab'><a href="#tab-bestseller">Bestseller Items</a></li>
+          </ul>
+        </div>
+        <div id="tab-latest" class="tab-content">
+          <div class="box">
+            <div id="latest-slidertab" class="row owl-carousel product-slider">
+              {% for i in p_info %}
+              <div class="item">
+                <div class="product-thumb transition">
+                  <div class="image product-imageblock"> <a href="product?p_id={{i.id}}&brand={{i.brand}}"><img src="{{i.img_product.url}}" style="width:100%; height:100%;" alt="{{i.item}}" title="{{i.item}}" class="img-responsive" /> </a>
+          <div class="button-group">
+                      <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product" ><i class="fa fa-eye"></i>View Item</button>
+                    </div>
+                  </div>
+                  <div class="caption product-detail">
+                    <h4 class="product-name"><a href="#" title="{{i.item}}">{{i.item}}</a></h4>
+                    <p class="price product-price">Rs. {{i.price}}<span class="price-tax"></span></p>
+                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+                  </div>
+        <div class="button-group">
+                      <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product" ><i class="fa fa-eye"></i>View Item</button>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <!-- tab-latest-->
+        <div id="tab-special" class="tab-content">
+          <div class="box">
+            <div id="special-slidertab" class="row owl-carousel product-slider">
+              {% for spec in p_info %}
+              <div class="item">
+                <div class="product-thumb transition">
+                  <div class="image product-imageblock"> <a href="product?p_id={{spec.id}}&brand={{spec.brand}}"><img src="{{spec.img_product.url}}" style="width:100%; height:100%;" alt="{{i.item}}" title="{{i.item}}" class="img-responsive" /> </a>
+          <div class="button-group">
+                      <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product" ><i class="fa fa-eye"></i>View Item</button>
+                    </div>
+                  </div>
+                  <div class="caption product-detail">
+                    <h4 class="product-name"><a href="product" title="{{i.item}}">{{spec.item}}</a></h4>
+                    <p class="price product-price"> <span class="price-new">Rs. {{spec.price}}</span> <span class="price-old">Rs. {{spec.old_price}}</span> <span class="price-tax">{{spec.price}}</span> </p>
+                  </div>
+        <div class="button-group">
+                      <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product" ><i class="fa fa-eye"></i>View Item</button>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              </div>
+          </div>
+        </div>
+        <!-- tab-special-->
+        <div id="tab-bestseller" class="tab-content">
+          <div class="box">
+            <div id="bestseller-slidertab" class="row owl-carousel product-slider">
+              {% for bs in p_info %}
+              <div class="item">
+                <div class="product-thumb transition">
+                  <div class="image product-imageblock"> <a href="product?p_id={{bs.id}}&brand={{i.brand}}"><img src="{{bs.img_product.url}}" style="width:100%; height:100%;" alt="{{i.item}}" title="{{i.item}}" class="img-responsive" /> </a>
+          <div class="button-group">
+                      <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product" ><i class="fa fa-eye"></i>View Item</button>
+                    </div>
+                  </div>
+                  <div class="caption product-detail">
+                    <h4 class="product-name"><a href="product?pid={{bs.id}}" title="{{i.item}}">{{bs.item}}</a></h4>
+                    <p class="price product-price"> <span class="price-new">Rs. {{bs.price}}</span> <span class="price-old">Rs. {{bs.old_price}}</span> <span class="price-tax">{{bs.price}}</span> </p>
+                  </div>
+        <div class="button-group">
+                      <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product" ><i class="fa fa-eye"></i>View Item</button>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="parallax">
+        <ul id="testimonial" class="row owl-carousel product-slider">
+          {% for a in ads_now%}
+          <li class="item">
+            <div class="panel-default">
+              <div class="testimonial-image"><img src="{{a.img_ads.url}}" alt="#"></div>
+              <div class="testimonial-name"><h2>{{a.brand}}</h2></div>
+              <div class="testimonial-desc">{{a.description}}</div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <h3 class="productblock-title">Featured Products</h3>
+      <div class="box">
+        <div id="feature-slider" class="row owl-carousel product-slider">
+          {% for i in p_info %}
+          <div class="item product-slider-item">
+            <div class="product-thumb transition">
+              <div class="image product-imageblock"> <a href="product?p_id={{i.id}}&brand={{i.brand}}"><img src="{{i.img_product.url}}" style="width:100%; height:100%;" alt="{{i.item}}" title="{{i.item}}" class="img-responsive" /> </a>
+      <div class="button-group">
+                  <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product" ><i class="fa fa-eye"></i>View Item</button>
+                </div>
+              </div>
+              <div class="caption product-detail">
+                <h4 class="product-name"><a href="product" title="{{i.item}}">{{i.item}}</a></h4>
+                <p class="price product-price"> <span class="price-new">Rs. {{i.price}}</span> <span class="price-old">{{i.old_price}}</span> <span class="price-tax">Ex Tax: $210.00</span> </p>
+              </div>
+    <div class="button-group">
+                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
+                <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product" ><i class="fa fa-eye"></i>View Item</button>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+{% include "footer.html" %}
+<script src="{% static 'javascript/parally.js' %}"></script> 
+<script>
+$('.parallax').parally({offset: -40});
+</script>
+</body>
+</html>
+
+{%block js%}
+
+{% include "addtocart.html" %}
+{% endblock %}
