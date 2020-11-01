@@ -1,4 +1,4 @@
-# eCommerce
+# eCommerce for Online Shoes Shopping
 
 This is a eCommerce website developeed using python and django framework.
 
