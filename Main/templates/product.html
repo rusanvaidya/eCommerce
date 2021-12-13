@@ -1,0 +1,214 @@
+{% include "header.html" %}
+{% load static %}
+
+{% for i in p_select %}
+<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="../"><i class="fa fa-home"></i></a></li>
+    <li><a href="category">Category</a></li>
+    <li><a href="category?p_for={{i.for_gender}}">{{i.for_gender}}</a></li>
+    <li><a href="product?p_id={{i.id}}&brand={{i.brand}}">{{i.item}}</a></li>
+  </ul>
+  <div class="row">
+    <div id="column-left" class="col-sm-3 hidden-xs column-left">
+      <div class="column-block">
+        {% include "categorylist.html" %}
+        <h3 class="productblock-title">Latest</h3>
+        <div class="row latest-grid product-grid">
+          {% for i in p_cat_m %}
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
+            <div class="product-thumb transition">
+              <div class="image product-imageblock">
+              <a href="product?p_id={{i.id}}&brand={{i.brand}}">
+              <img src="{{i.img_product.url}}"class="img-responsive" />
+              </a>
+              </div>
+              <div class="caption product-detail">
+                <h4 class="product-name">
+                <a href="product?p_id={{i.id}}&brand={{i.brand}}" title="{{i.item}}">{{i.item}}</a>
+                </h4>
+                <p class="price product-price">{{i.price}}</p>
+                <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div id="content" class="col-sm-9">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="thumbnails">
+            <div><a class="thumbnail" href="{{p_info.img.url}}" title="{{i.item}}"><img src="{{i.img_product.url}}" class="picture"/></a></div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <h1 class="productpage-title item">{{i.item}}</h1>
+          <div class="rating product"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="review-count"> <a href="#" onClick="$('a[href=\'#tab-review\']').trigger('click'); return false;"></a> / <a href="#" onClick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Write a review</a></span>
+            <hr>
+            <!-- AddThis Button BEGIN -->
+            <div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like" ></a> <a class="addthis_button_tweet"></a> <a class="addthis_button_pinterest_pinit"></a> <a class="addthis_counter addthis_pill_style"></a></div>
+            <!-- AddThis Button END -->
+          </div>
+          <ul class="list-unstyled productinfo-details-top">
+            <li>
+              <h2 class="productpage-price">Price: Rs. <span class="price_new">{{i.price}}</span></h2>
+            </li>
+            <li><span class="productinfo-tax">Old Price: Rs. <i style="text-decoration: line-through;">{{i.old_price}}</i></span></li>
+          </ul>
+          <hr>
+          <ul class="list-unstyled product_info">
+            <li>
+              <label>Brand:</label>
+              <span> <a href="category?brand={{i.brand}}" class="brand_name">{{i.brand}}</a></span></li>
+            <li>
+              <label>Product Code:</label>
+              #<span class="product_id"> {{i.id}}</span></li>
+            <li>
+              <label>Availability:</label>
+              <span> {{i.availability}}</span></li>
+          </ul>
+          <hr>
+          <p class="product-desc">{{i.detail}}</p>
+          <div id="product">
+            <div class="form-group">
+              <style>
+
+              input::-webkit-outer-spin-button,
+              input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                 margin: 0;
+              }
+              </style>
+              <!-- <form method="POST"> -->
+                <!-- {% csrf_token %} -->
+                <input type="text" value="{{i.img_product.url}}" name="image_src" style="display: none;">
+                <input type="number" value="{{i.id}}" readonly name="project_id" style="display: none;">
+                <input type="text" value="{{i.item}}" readonly name="item" style="display:none">
+                <input type="number" value="{{i.price}}" readonly name="price" style="display:none">              
+                <label class="control-label qty-label" for="input-quantity">Qty</label>
+                <input type="number" name="quantity" value="1" size="2" id="input-quantity" min="1" max="5" class="form-control productpage-qty qty_pro"/>
+                <input type="hidden" name="product_id" value="48" />
+                <label class="control-label qty-label" for="input-quantity">Size</label>
+                <select name="size" style="height:40px; background-color: rgb(47, 24, 17); color: white;" class="size_pro">
+                  <option>40</option>
+                  <option>41</option>
+                  <option>42</option>
+                  <option>43</option>
+                  <option>44</option>
+                </select>
+                <div class="btn-group">
+                  <button type="submit" id="{{i.id}}" class="btn btn-primary btn-lg btn-block addtocart cart">Add to Cart</button>
+                <!-- </form> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="productinfo-tab">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#tab-description" data-toggle="tab">Description</a></li>
+          <li><a href="#tab-review" data-toggle="tab">Reviews</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="tab-description">
+            <div class="cpt_product_description ">
+              <div>
+               {{i.description}} 
+              </div>
+            </div>
+            {% endfor %}
+            </div>
+          <div class="tab-pane" id="tab-review" style="margin: 10px;">
+            {% for i in p_select %}
+            <form class="form-horizontal" method="POST" action="product?p_id={{i.id}}&brand={{i.brand}}">
+              {% csrf_token %}
+              <div id="review"></div>
+              <h2>Write a review</h2>
+              <div class="form-group required">
+                <div class="col-sm-12">
+                  <input type="number" name="p_id" value="{{i.id}}" style="display:none;">
+                  <input type="number" name="brand" value="{{i.brand}}" style="display:none;">
+                  {% endfor %}
+                  {% if user.is_authenticated %}
+                  <input type="text" name="sender" value="{{user.first_name}} {{user.last_name}}" id="input-name" class="form-control" style="display: none;"/>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group required">
+                <div class="col-sm-12">
+                  <label class="control-label" for="input-review">Your Review</label>
+                  <textarea rows="5" id="input-review" class="form-control" name="review_text" required></textarea>
+                </div>
+              </div>
+              <div class="form-group required">
+                <div class="col-sm-12">
+                  <label class="control-label">Rating</label>
+                  &nbsp;&nbsp;&nbsp; Bad&nbsp;
+                  <input type="radio" name="rating" required value="1" />
+                  &nbsp;
+                  <input type="radio" name="rating" value="2" />
+                  &nbsp;
+                  <input type="radio" name="rating" value="3" />
+                  &nbsp;
+                  <input type="radio" name="rating" value="4" />
+                  &nbsp;
+                  <input type="radio" name="rating" value="5" />
+                  &nbsp;Good</div>
+              </div>
+              <div class="buttons clearfix">
+                <div class="pull-right">
+                  {% if user.is_authenticated %}
+                  <button type="submit" id="button-review" class="btn btn-primary sub_review">Submit</button>
+                  {% else %}
+                  <button type="submit" class="btn btn-primary" disabled>Submit</button>
+                  {% endif %}
+                </div>
+              </div>
+            </form>
+            <div>
+              {% for r in review_get %}
+              <div><b style="color: rgb(66, 32, 19);">{{r.sender}} </b><i class="fa fa-star" style="color:rgb(156, 154, 8);">{{r.rating}}</i></div>
+              <div>{{r.review_text}}</div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <h3 class="productblock-title">Related Products</h3>
+      <div class="box">
+        <div id="related-slidertab" class="row owl-carousel product-slider">
+          {% for i in p_info %}
+          <div class="product-layout product-list col-xs-12">
+            <div class="product-thumb">
+              <div class="image product-imageblock"> <a href="product?p_id={{i.id}}&brand={{i.brand}}"> <img src="{{i.img_product.url}}"  title="{{i.item}}" class="img-responsive" /> </a>
+                <div class="button-group">
+                  <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+                </div>
+              </div>
+              <div class="caption product-detail">
+                <h4 class="product-name"> <a href="product?p_id={{i.id}}&brand={{i.brand}}" title="{{i.item}}">{{i.item}}</a> </h4>
+                <p class="price product-price"><span class="price-old">Rs. {{i.old_price}}</span> Rs. <span id="price">{{i.price}}</span></p>
+               <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+              </div>
+             <div class="button-group">
+               <button type="button" class="addtocart-btn" data-toggle="tooltip" onclick="window.open('product?p_id={{i.id}}&brand={{i.brand}}','_self')" title="View Product"><i class="fa fa-eye"></i>View Item</button>
+             </div>
+            </div>
+           </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer block Start  -->
+{% include "footer.html" %}
+
+{%block js%}
+{% include "addtocart.html" %}
+{% endblock %}
+</body>
+</html>
+

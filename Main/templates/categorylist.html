@@ -1,0 +1,43 @@
+<div class="column-block">
+    <div class="columnblock-title">Categories</div>
+    <div class="category_block">
+      <ul class="box-category treeview-list treeview">
+        <li><a href="#" class="activSub">Brand</a>
+          <ul>
+            {% for b in p_brand %}
+            {% ifchanged b.brand %}
+            <li><a href="category?brand={{b.brand}}">{{b.brand}}</a></li>
+            {% endifchanged %}
+            {% endfor %}
+          </ul>
+        </li>
+        <li><a href="category?gfor=Women" class="activSub">Women</a>
+          <ul>
+            {% for g in p_cat_w %}
+            {% ifchanged g.category %}
+            <li><a href="category?gfor=Women&type={{g.category}}">{{g.category}}</a></li>
+            {% endifchanged %}
+            {% endfor %}
+          </ul>
+        </li>
+        <li><a href="category?gfor=Men" class="activSub">Men</a>
+          <ul>
+            {% for g in p_cat_m %}
+            {% ifchanged g.category %}
+            <li><a href="category?gfor=Men&type={{g.category}}">{{g.category}}</a></li>
+            {% endifchanged %}
+            {% endfor %}
+          </ul>
+        </li>
+        <li><a href="category?gfor=Kid" class="activSub">Kids</a>
+          <ul>
+            {% for g in p_cat_k %}
+            {% ifchanged g.category %}
+            <li><a href="category?gfor=Kid&type={{g.category}}">{{g.category}}</a></li>
+            {% endifchanged %}
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
