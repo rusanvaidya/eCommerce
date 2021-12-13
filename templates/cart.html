@@ -1,0 +1,82 @@
+{% include "header.html" %}
+{% load static %}
+
+
+<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="../"><i class="fa fa-home"></i></a></li>
+    <li><a href="cart">Shopping Cart</a></li>
+  </ul>
+  <div class="row">
+    <div id="column-left" class="col-sm-3 hidden-xs column-left">
+      <div class="column-block">
+        {% include "categorylist.html" %}
+      </div>
+    </div>
+    <div class="col-sm-9" id="content">
+      <h1>Shopping Cart                &nbsp;(10.00kg) </h1>
+      <form enctype="multipart/form-data" method="post" action="#">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <tr>
+              <th class="text-center">Image</th>
+              <th class="text-left">Product Name</th>
+              <th class="text-left">Model</th>
+              <th class="text-left">Quantity</th>
+              <th class="text-right">Unit Price</th>
+              <th class="text-right">Total</th>
+            </tr>
+            <tbody class="viewcart_now" id="view_cart_table">
+            </tbody>
+          </table>
+        </div>
+      </form>
+      <br>
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-8">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td class="text-right"><strong>Sub-Total:</strong></td>
+                <td class="text-right">Rs. <span id="sub_total_view"></span></td>
+              </tr>
+              <tr>
+                <td class="text-right"><strong>Delivery Charge (5%):</strong></td>
+                <td class="text-right">Rs. <span id="charge_view"></span></td>
+              </tr>
+              <tr>
+                <td class="text-right"><strong>Total:</strong></td>
+                <td class="text-right">Rs. <span id="total_view"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="buttons">
+        <div class="pull-left"><a class="btn btn-default" href="category">Continue Shopping</a></div>
+        <div class="pull-right"><a class="btn btn-primary" href="checkout">Checkout</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer block Start  -->
+{% include "footer.html" %}
+</body>
+</html>
+
+<script>
+    var addedtocart = localStorage.getItem('view_cart')
+    var p_add = document.getElementById('view_cart_table')
+    p_add.innerHTML = addedtocart
+
+    document.getElementById("sub_total_view").innerText=localStorage.getItem('subtotal')
+    document.getElementById("charge_view").innerText=localStorage.getItem('charge')
+    document.getElementById("total_view").innerText=localStorage.getItem('total')
+     
+</script>
+
+
+{%block js%}
+
+{% include "addtocart.html" %}
+{% endblock %}

@@ -1,0 +1,127 @@
+<script async>
+    if(localStorage.getItem('cart_item') == null)
+    {
+        var subtotal = 0
+        var charge = 0
+        var total = 0
+        localStorage.setItem('subtotal',subtotal)
+        localStorage.setItem('charge',charge)
+        localStorage.setItem('total',total)
+                
+    }
+    // localStorage.clear()
+    var buttonadd = document.getElementsByClassName("cart")
+    for(var i=0;i<buttonadd.length;i++)
+    {
+        var button = buttonadd[i]
+        button.addEventListener('click',function(event)
+        {
+            var buttonClicked = event.target
+            var shopItem = buttonClicked.parentElement.parentElement.parentElement.parentElement.parentElement
+            var image = shopItem.getElementsByClassName("picture")[0].src
+            var item = shopItem.getElementsByClassName("item")[0].innerText
+            var product_id = shopItem.getElementsByClassName("product_id")[0].innerText
+            var qty = parseInt(shopItem.getElementsByClassName("qty_pro")[0].value)
+            var size = shopItem.getElementsByClassName("size_pro")[0].value
+            var price = shopItem.getElementsByClassName("price_new")[0].innerText
+            var brand = shopItem.getElementsByClassName("brand_name")[0].innerText
+            addItemtocart(image,item,product_id,qty,price,size,brand)
+        })
+
+        function addItemtocart(image,item,product_id,qty,price,size,brand)
+        {
+            var cartRow = document.createElement('tr')
+            var cartItems = document.getElementsByClassName('cart_drop')[0]
+            var cartItemNames = document.getElementsByClassName('cartitemname')
+            if (cartItems.rows.length>0)
+            {
+                for(var i=0;i<cartItems.rows.length;i++)
+                {   
+                    if(cartItemNames[i].innerText==item)
+                    {
+                        alert("Item already added");
+                        return
+                    }
+                }
+            }
+            var cartRowcontent = 
+                 `<tr>
+                    <td class="text-center"><a href="product?p_id=${product_id}&brand=${brand}"><img class="img-thumbnail" style="width:50px; height:50px;" src="${image}"></a></td>
+                    <td class="text-left"><a href="product?p_id=${product_id}&brand=${brand}" class="cartitemname">${item}</a></td>
+                    <td class="text-right">x<span class="qty_drop">${qty}</td>
+                    <td class="text-right">Rs.<span class="price_drop">${price}</td>
+                    <td class="text-center"><button class="btn btn-danger btn-xs" title="Remove" type="button"><i class="fa fa-times"></i></button></td>
+                  </tr>`;
+            cartRow.innerHTML = cartRowcontent
+            cartItems.append(cartRow)
+            localStorage.setItem('cart_item',cartItems.innerHTML)
+            cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem) 
+            updateCartTotal()           
+        }
+    }
+    var removeCartItemButton = document.getElementsByClassName('btn-danger')
+    for(var i=0;i<removeCartItemButton.length;i++)
+    {
+        var button = removeCartItemButton[i]
+        button.addEventListener('click',removeCartItem)
+    }
+    
+    function removeCartItem(event)
+    {
+        var buttonClicked = event.target
+        buttonClicked.parentElement.parentElement.parentElement.parentElement.parentElement.remove()
+        localStorage.removeItem('cart_item')
+        localStorage.removeItem('subtotal')
+        localStorage.removeItem('charge')
+        localStorage.removeItem('total')
+        location.reload()
+        updateCartTotal()
+    }
+
+    function updateCartTotal()
+    {   var subtotal =0
+    
+        var cartTable = document.getElementById('cart_table')
+        if(cartTable == null)
+        {
+            subtotal = 0
+            var charge = parseFloat(subtotal)*parseFloat(0.05)
+            var total = parseFloat(subtotal)+parseFloat(charge)
+            document.getElementById("item_no").innerText="0"
+        }
+        else
+        {
+            for(var i=0;i<cartTable.rows.length;i++)
+            {
+                var cartTablerows = cartTable[i]
+                var priceElement = cartTable.getElementsByClassName("price_drop")[0]
+                var qtyElement = cartTable.getElementsByClassName("qty_drop")[0]
+                var price = parseFloat(priceElement.innerText)
+                var qty = parseInt(qtyElement.innerText)
+                subtotal = subtotal + (price* qty)
+                var charge = parseFloat(subtotal)*parseFloat(0.05)
+                var total = parseFloat(subtotal)+parseFloat(charge)
+                localStorage.setItem('subtotal',subtotal)
+                localStorage.setItem('charge',charge)
+                localStorage.setItem('total',total)
+                document.getElementById("item_no").innerText=cartTable.rows.length
+            }
+        }
+            document.getElementById("sub_total").innerText=subtotal
+            document.getElementById("charge").innerText=charge
+            document.getElementById("total").innerText=total
+            document.getElementById("total_drop").innerText=total 
+    }
+        document.getElementById("sub_total").innerText=localStorage.getItem('subtotal')
+        document.getElementById("charge").innerText=localStorage.getItem('charge')
+        document.getElementById("total_drop").innerText=localStorage.getItem('total')
+        document.getElementById("total").innerText=localStorage.getItem('total')
+        document.getElementById('cart_table').innerHTML=localStorage.getItem('cart')
+
+    var previouslyadded = localStorage.getItem('cart_item')
+    console.log(previouslyadded)
+    var p_add = document.getElementById('cart_table')
+    p_add.innerHTML = previouslyadded
+    p_add.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem) 
+    updateCartTotal()           
+</script>
