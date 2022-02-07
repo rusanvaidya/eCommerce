@@ -26,7 +26,7 @@ SECRET_KEY = '^qb2stqu&7hs3)4%q*cme$1ppfvo=+=o94855w8y+ic7eq)+d+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'footmandu.herokuapp.com']
 
 
 # Application definition
